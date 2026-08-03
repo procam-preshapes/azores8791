@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Portugal">
+<meta name="theme-color" content="#10233D">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Lindsey Trip · Portugal 2026</title>
+<style>
+  :root{
+    --ink:#10233D;
+    --azulejo:#1B4B8F;
+    --azulejo-soft:#E4EBF5;
+    --porcelain:#FBFAF7;
+    --brass:#A87423;
+    --brass-soft:#F6EEDF;
+    --rule:#D5D9E0;
+    --muted:#5A6577;
+    --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    --data:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;-webkit-text-size-adjust:100%}
+  html,body{margin:0;padding:0}
+  body{background:var(--porcelain);color:var(--ink);font-family:var(--body);
+       font-size:17px;line-height:1.5;padding:0 0 4rem}
+
+  header{background:var(--ink);color:#fff;padding:calc(env(safe-area-inset-top) + 1.4rem) 1.1rem 1.2rem}
+  .eyebrow{font-family:var(--data);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#9FB4D4;margin:0 0 .5rem}
+  h1{font-family:var(--display);font-weight:400;font-size:1.75rem;line-height:1.15;margin:0 0 .5rem}
+  h1 em{font-style:italic;color:#E8C583}
+  .subhead{margin:0;font-size:.9rem;color:#C3D0E4;line-height:1.45}
+
+  nav{position:sticky;top:0;z-index:20;display:flex;gap:.4rem;overflow-x:auto;
+      background:rgba(251,250,247,.96);backdrop-filter:saturate(180%) blur(8px);
+      border-bottom:1px solid var(--rule);padding:.55rem .8rem;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav a{flex:0 0 auto;font-family:var(--data);font-size:.72rem;letter-spacing:.06em;
+        text-transform:uppercase;text-decoration:none;color:var(--azulejo);
+        border:1px solid var(--rule);border-radius:999px;padding:.36rem .7rem;background:#fff}
+  nav a.hot{background:var(--brass);border-color:var(--brass);color:#fff}
+
+  main{padding:0 1.1rem}
+  h2{font-family:var(--data);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+     color:var(--muted);margin:2.4rem 0 .5rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);
+     scroll-margin-top:3.4rem}
+  .hint{font-size:.8rem;color:var(--muted);margin:0 0 .8rem}
+
+  /* ---- expandable day ---- */
+  details.day{border:1px solid var(--rule);border-left:3px solid var(--azulejo);
+              background:#fff;border-radius:3px;margin:0 0 .6rem;overflow:hidden}
+  details.day[open]{border-left-color:var(--brass)}
+  details.day.today{border-left-color:var(--brass);box-shadow:0 0 0 2px var(--brass-soft)}
+  details.day > summary{list-style:none;cursor:pointer;padding:.85rem 2.2rem .85rem .95rem;position:relative}
+  details.day > summary::-webkit-details-marker{display:none}
+  details.day > summary::after{content:"";position:absolute;right:1rem;top:1.35rem;
+      width:8px;height:8px;border-right:2px solid var(--azulejo);border-bottom:2px solid var(--azulejo);
+      transform:rotate(45deg);transition:transform .18s ease}
+  details.day[open] > summary::after{transform:rotate(-135deg);top:1.6rem}
+  .when{font-family:var(--data);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--azulejo);display:block;margin-bottom:.25rem}
+  details.day.today .when{color:var(--brass)}
+  details.day.today .when::after{content:" · today"}
+  .what{font-weight:600;display:block;margin-bottom:.15rem}
+  .note{font-size:.86rem;color:var(--muted);display:block}
+  .body{padding:0 .95rem 1rem;border-top:1px solid var(--rule);margin-top:.2rem;padding-top:.85rem}
+  .body p{margin:.6rem 0;font-size:.92rem}
+  .body p:first-child{margin-top:0}
+  .body .k{font-family:var(--data);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+           color:var(--muted);display:block;margin:1.1rem 0 .3rem}
+  .body .k:first-child{margin-top:0}
+  .body ul{margin:.4rem 0;padding-left:1.1rem;font-size:.9rem}
+  .body li{margin-bottom:.3rem}
+  .ref{font-family:var(--data);font-size:.85rem;background:var(--azulejo-soft);
+       padding:.12rem .35rem;border-radius:2px;white-space:nowrap}
+
+  .wedding{background:var(--brass-soft);border:1px solid #E3D2B0;border-radius:3px;
+           padding:1.3rem 1.1rem;margin:1.6rem 0 0;text-align:center;scroll-margin-top:3.4rem}
+  .wedding .names{font-family:var(--display);font-size:1.5rem;line-height:1.2;margin:.2rem 0 .1rem}
+  .wedding .amp{font-style:italic;font-size:1rem;color:var(--brass);display:block;margin:.1rem 0}
+  .wedding .time{font-family:var(--data);font-size:1.5rem;margin:.7rem 0 .1rem;color:var(--brass)}
+  .wedding .venue{font-size:.95rem;margin:.6rem 0 0;line-height:1.45}
+  .wedding .venue strong{display:block}
+  .hairline{width:36px;height:1px;background:#D9C39A;margin:.9rem auto;border:0}
+
+  .callout{background:var(--azulejo-soft);border-radius:3px;padding:.8rem .9rem;
+           font-size:.88rem;line-height:1.5;margin:.9rem 0;text-align:left}
+  .callout strong{color:var(--azulejo)}
+  .warn{background:#FBF0E8;color:#7A3A12}
+  .warn strong{color:#8A3D0E}
+
+  a.call{display:flex;justify-content:space-between;align-items:center;gap:.8rem;
+         padding:.7rem .1rem;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+  a.call:active{background:var(--azulejo-soft)}
+  a.call .who{font-size:.93rem;line-height:1.3}
+  a.call .who small{display:block;color:var(--muted);font-size:.76rem;margin-top:.1rem}
+  a.call .num{font-family:var(--data);font-size:.85rem;color:var(--azulejo);white-space:nowrap}
+  .sos a.call .num{color:#A32F2F}
+  .body a{color:var(--azulejo)}
+
+  ol.todo{margin:.4rem 0 0;padding-left:1.15rem;font-size:.92rem}
+  ol.todo li{margin-bottom:.55rem}
+
+  .tools{display:flex;gap:.5rem;margin:.2rem 0 1rem}
+  .tools button{flex:1;font-family:var(--data);font-size:.7rem;letter-spacing:.08em;
+      text-transform:uppercase;background:#fff;color:var(--azulejo);border:1px solid var(--rule);
+      border-radius:999px;padding:.5rem .6rem}
+  footer{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);
+         font-size:.76rem;color:var(--muted);text-align:center;line-height:1.6}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Aug 28 – Sep 8, 2026</p>
+  <h1>Portugal &amp; the Azores<br><em>for Alexandrea &amp; Marvin</em></h1>
+  <p class="subhead">Brian &amp; Shalene Lindsey · b.linzee@gmail.com · +1 714-269-2448<br>
+  Mainland Portugal is 8 hrs ahead of California. <strong>The Azores are 1 hr behind mainland Portugal.</strong></p>
+</header>
+
+<nav>
+  <a href="#wedding" class="hot">The wedding</a>
+  <a href="#days">Day by day</a>
+  <a href="#transport">Getting around</a>
+  <a href="#contacts">Numbers</a>
+  <a href="#open">To do</a>
+</nav>
+
+<main>
+
+<section class="wedding" id="wedding">
+  <p class="eyebrow" style="color:var(--brass)">Saturday, September 5</p>
+  <p class="names">Marvin<span class="amp">and</span>Alexandrea</p>
+  <hr class="hairline">
+  <p class="time">4:30 PM</p>
+  <p class="venue">
+    <strong>Caloura Mar Events</strong>
+    Quinta de Santo António<br>
+    Rua Quinta Altamira 51, 9560-211 Lagoa, São Miguel<br>
+    <em>Dinner and dancing to follow</em>
+  </p>
+  <p style="margin:.9rem 0 0"><a href="tel:+351919746578" style="font-family:var(--data);color:var(--brass);text-decoration:none;font-size:.9rem">Call venue · +351 919 746 578</a></p>
+  <div class="callout warn" style="margin-top:1rem">
+    <strong>Leave the hotel by 3:45 PM.</strong> Caloura is 25–30 min from Ponta Delgada down a narrow coast road. Arrive by 4:00 — sunset is around 8:10, so the ceremony runs in good light.
+  </div>
+  <div class="callout warn">
+    <strong>Book the ride home before you go.</strong> Dinner and dancing means a late return on unlit rural roads, and Portugal's alcohol limit is 0.05 — lower than California's. Ask Alexandrea first whether there's a guest shuttle.
+  </div>
+  <div class="callout">
+    <strong>Welcome drinks — Friday, Sep 4.</strong> Details are on the couple's wedding website. Time and venue still needed.
+  </div>
+</section>
+
+<h2 id="days">Day by day</h2>
+<p class="hint">Tap any day to open the full details — confirmation numbers, check-in times, what to do if it goes wrong.</p>
+
+<div class="tools">
+  <button id="openAll">Open all</button>
+  <button id="closeAll">Close all</button>
+</div>
+
+<!-- ===== AUG 28 ===== -->
+<details class="day" data-start="2026-08-28" data-end="2026-08-28">
+  <summary>
+    <span class="when">Fri Aug 28</span>
+    <span class="what">LAX → Philadelphia → Lisbon</span>
+    <span class="note">AA 2148 dep 11:46 AM · AA 258 dep 9:05 PM, overnight</span>
+  </summary>
+  <div class="body">
+    <span class="k">AA 2148 · LAX → PHL · First</span>
+    <p>Depart LAX <strong>11:46 AM</strong> · Arrive PHL <strong>8:09 PM</strong> · 5h 23m</p>
+
+    <span class="k">AA 258 · PHL → LIS · Business, overnight</span>
+    <p>Depart PHL <strong>9:05 PM</strong> · Arrive Lisbon <strong>9:05 AM</strong> Sat Aug 29 · 7h 00m</p>
+
+    <span class="k">Check-in</span>
+    <p>AA app opens 24 hrs ahead — <strong>11:46 AM Pacific, Thu Aug 27</strong>. Be at LAX around 9:45 AM.</p>
+    <p>Passports must be valid at least <strong>3 months past Sep 8, 2026</strong>.</p>
+
+    <div class="callout warn"><strong>The Philadelphia connection is 56 minutes.</strong> AA's international departures usually leave from a different terminal (A-West) than the domestic arrival. Any delay out of LAX puts Lisbon at risk — and the Lisbon hotel is non-refundable. Worth calling AA to move to an earlier LAX departure.</div>
+
+    <span class="k">If something goes wrong</span>
+    <p><a href="tel:+18004337300">American Airlines · +1 800 433 7300</a>, 24 hrs.<br>
+    AA record locator: <strong>still needed</strong> — 6 characters, top of your confirmation email.</p>
+  </div>
+</details>
+
+<!-- ===== AUG 29 ===== -->
+<details class="day" data-start="2026-08-29" data-end="2026-08-29">
+  <summary>
+    <span class="when">Sat Aug 29</span>
+    <span class="what">Land Lisbon 9:05 AM · one night</span>
+    <span class="note">The One Palácio da Anunciada, Restauradores</span>
+  </summary>
+  <div class="body">
+    <span class="k">Airport → hotel</span>
+    <p>Metro <strong>red line to Alameda</strong>, change to <strong>green</strong>, off at <strong>Restauradores</strong> — the hotel is right there. About 30 min, a few euros. Or Uber/Bolt, €15–20, 15–20 min. With bags after an overnight flight, take the car.</p>
+
+    <span class="k">The One Palácio da Anunciada</span>
+    <p>Restauradores / Avenida da Liberdade, Lisbon<br>
+    <a href="tel:+351210412300">+351 210 412 300</a></p>
+    <p>Booked through Hotelsone · Itinerary <span class="ref">9101606043910</span><br>
+    Hotel confirmation <span class="ref">2483860187</span></p>
+    <p>Room (Cosy) · 2 adults · <strong>non-refundable</strong> · Aug 29 → Aug 30<br>
+    $640.11 total ($528.36 + $111.75 tax and fees)<br>
+    Free welcome drink · free WiFi · guest name Brian Lindsey</p>
+
+    <div class="callout"><strong>You land at 9:05, check-in is 3:00 PM.</strong> Email or call ahead to ask for early check-in — after an overnight flight it's worth the ask. Otherwise they'll hold your bags.</div>
+
+    <span class="k">If something goes wrong</span>
+    <p><a href="tel:+18882734683">Hotelsone · +1 888 273 4683</a>, then the hotel direct.</p>
+  </div>
+</details>
+
+<!-- ===== AUG 30 ===== -->
+<details class="day" data-start="2026-08-30" data-end="2026-08-30">
+  <summary>
+    <span class="when">Sun Aug 30</span>
+    <span class="what">Lisbon → Lagos · not booked</span>
+    <span class="note">Train or coach, ~4 hrs · Cascade check-in</span>
+  </summary>
+  <div class="body">
+    <div class="callout warn"><strong>Book this week.</strong> Discounted seats are limited per departure and the price steps up as they sell. Waiting gains you nothing.</div>
+
+    <span class="k">Option A · Train — cp.pt</span>
+    <p>Alfa Pendular or Intercidades from <strong>Lisboa Oriente</strong> (or Entrecampos) to <strong>Tunes</strong>, then change to a Regional across to <strong>Lagos</strong>. There is no direct Lisbon–Lagos train. About 4 hrs total.</p>
+    <ul>
+      <li>Tickets sell up to <strong>60 days</strong> ahead — Aug 30 is bookable now</li>
+      <li>Promo fares: up to <strong>56% off at 5+ days</strong>, up to <strong>65% at 8+ days</strong>, limited seats per train</li>
+      <li>Promo tickets can be changed but <strong>not refunded</strong></li>
+      <li>Book at <strong>cp.pt only</strong> — CP warns that Rail.Ninja, Kiwi and Firebirdtours aren't official partners and charge more</li>
+      <li>The Algarve line finished its rebuild <strong>July 19, 2026</strong> — electric trains, more frequencies, timetables now settled</li>
+    </ul>
+
+    <span class="k">Option B · Coach — rede-expressos.pt</span>
+    <p><strong>Lisboa Sete Rios → Lagos, direct</strong>, about 4 hrs, cheaper than the train. Seat reservation required; bookable up to 90 days ahead. With two people and luggage, no change at Tunes is worth real money.</p>
+
+    <span class="k">Then</span>
+    <p>Lagos station (Estrada de São Roque) → Cascade is about 10 min by taxi. Taxis wait outside, but Sunday afternoons can be thin — have a number ready.</p>
+    <p><a href="tel:+351925841130">Black &amp; Green Taxi · +351 925 841 130</a></p>
+  </div>
+</details>
+
+<!-- ===== AUG 31 – SEP 2 ===== -->
+<details class="day" data-start="2026-08-31" data-end="2026-09-02">
+  <summary>
+    <span class="when">Mon Aug 31 – Wed Sep 2</span>
+    <span class="what">Lagos, Algarve</span>
+    <span class="note">Cascade Wellness Resort · bed &amp; breakfast</span>
+  </summary>
+  <div class="body">
+    <span class="k">Cascade Wellness Resort ★★★★★</span>
+    <p>Rua das Ilhas, Lagos 8600-513<br>
+    <a href="tel:+351282771500">+351 282 771 500</a> · reservations@cascade.pt</p>
+    <p>Booking ID <span class="ref">e2r60dwe42</span> · holder Brian Lindsey<br>
+    Double Room · bed &amp; breakfast · 2 adults · 4 nights<br>
+    <strong>€1,637.30</strong> (€1,544.62 + 6% VAT €92.68), 6.65% discount already applied</p>
+
+    <span class="k">Paying</span>
+    <p>Rate is <strong>Book Now, Pay Later — the full amount is due at check-in</strong>. Bring the physical Visa card that guaranteed the booking; they require the same card. Cash is capped at €1,000.</p>
+
+    <span class="k">Times</span>
+    <p>Check-in from 3:00 PM · check-out by 12:00 PM</p>
+
+    <div class="callout warn"><strong>Free cancellation until Aug 25, 2026.</strong> From Aug 26 the penalty is the full €1,637.30. No-show or early departure is charged in full.</div>
+
+    <span class="k">Good to know</span>
+    <p>Spa 10:00 AM–6:00 PM, heated pool is outdoors. Guests under 16 can't use the spa or gym. The resort sits on the cliffs near Ponta da Piedade, about 5 min from town.</p>
+  </div>
+</details>
+
+<!-- ===== SEP 3 ===== -->
+<details class="day" data-start="2026-09-03" data-end="2026-09-03">
+  <summary>
+    <span class="when">Thu Sep 3</span>
+    <span class="what">Lagos → Faro → Ponta Delgada</span>
+    <span class="note">Flight 13:25–15:05 · Grand Hotel check-in</span>
+  </summary>
+  <div class="body">
+    <span class="k">Getting to Faro airport — no car</span>
+    <p><strong>Recommended: pre-booked private transfer, ~€90–130 for two.</strong> One vehicle from Cascade's door to the terminal, no connections on a flight morning. Book a week or two out, confirm by WhatsApp the day before.</p>
+    <p><a href="tel:+351969124177">Faro Airport Transfers · +351 969 124 177</a><br>
+    <a href="tel:+351920137793">Lagos Transfers &amp; Tours · +351 920 137 793</a></p>
+    <p><strong>Cheaper: train + taxi, ~2h15 door to door, €25–30 for two.</strong> Taxi to Lagos station, Regional train to Faro (~1h45), then a 10-min taxi or the line 16 bus to the airport. It works — it's just three handoffs with luggage.</p>
+
+    <span class="k">Timing</span>
+    <p>Be at FAO by <strong>11:15–11:30</strong>. That means leaving Lagos around 10:00–10:15 by road, or a Lagos train around 9:00. Portuguese domestic flight, so no passport control, but Faro is busy in early September.</p>
+    <p>You'll be checking out around 10 rather than using the noon checkout — settle the Cascade bill Wednesday night.</p>
+
+    <span class="k">Faro (FAO) → Ponta Delgada (PDL)</span>
+    <p>Depart <strong>13:25</strong> · Arrive <strong>15:05</strong> · 2h 40m — you gain an hour flying west<br>
+    Booked via Flight Network, order <span class="ref">1139-319-716</span><br>
+    Ticketed: Brian William Lindsey, Shalene Eve Lindsey<br>
+    <strong>Operating airline and flight number still needed</strong> — the confirmation cuts off above it</p>
+
+    <span class="k">PDL airport → hotel</span>
+    <p>Taxi, about 10 min, roughly €10–15. Rank outside arrivals. <strong>Bring cash</strong> — many Azorean taxis don't take cards.</p>
+    <p><a href="tel:+351296382000">Taxis Ponta Delgada · +351 296 382 000</a></p>
+
+    <span class="k">If something goes wrong</span>
+    <p>Flight Network 24/7 support — number is on your confirmation email, contact page at flightnetwork.com/rf/contact-us. Have order 1139-319-716 ready. Day-of, go straight to the airline counter at FAO; it's faster than an agency.</p>
+  </div>
+</details>
+
+<!-- ===== SEP 3–7 HOTEL ===== -->
+<details class="day" data-start="2026-09-03" data-end="2026-09-07">
+  <summary>
+    <span class="when">Sep 3 – Sep 7</span>
+    <span class="what">Grand Hotel Açores Atlântico</span>
+    <span class="note">Ponta Delgada · Bay View, FLEX rate · 4 nights</span>
+  </summary>
+  <div class="body">
+    <p>Rua Infante D. Henrique 113, 9500-150 Ponta Delgada<br>
+    <a href="tel:+351296302200">+351 296 302 200</a><br>
+    reservas.online.ghaa@bensaude.pt<br>
+    Manage: bensaude.e-gds.com/webfrontendcorporate</p>
+
+    <p>Bay View — <strong>FLEX rate</strong> · 2 adults · 1 room<br>
+    Check-in Sep 3 · check-out Sep 7<br>
+    US$2,093.69 + city tax US$14.07<br>
+    Main guest: Brian Lindsey</p>
+
+    <div class="callout"><strong>This one was booked under brian@procam-preshapes.com</strong>, not the Gmail used for everything else. Check that inbox for schedule notices too.</div>
+
+    <p>Waterfront in central Ponta Delgada, about 10 min from the airport, 25–30 min from the wedding venue.</p>
+    <p>FLEX normally allows changes — worth confirming the exact deadline with the hotel.</p>
+
+    <div class="callout warn"><strong>Monday checkout is noon, your flight isn't until 18:05.</strong> Ask about a late checkout, and they'll hold luggage either way.</div>
+  </div>
+</details>
+
+<!-- ===== SEP 4 ===== -->
+<details class="day" data-start="2026-09-04" data-end="2026-09-04">
+  <summary>
+    <span class="when">Fri Sep 4</span>
+    <span class="what">Welcome drinks</span>
+    <span class="note">Time and venue still to confirm</span>
+  </summary>
+  <div class="body">
+    <p>The invitation says: <em>"additionally, please join us for a welcome drinks event on september fourth (details available on our website)."</em></p>
+    <div class="callout warn"><strong>This is the only event of the weekend with no address.</strong> Get the time and location off the wedding website and it goes here — family will ask about this first.</div>
+    <p>Worth also asking whether there's a rehearsal, or family photos, on Friday or Saturday morning.</p>
+  </div>
+</details>
+
+<!-- ===== SEP 5 ===== -->
+<details class="day today-anchor" data-start="2026-09-05" data-end="2026-09-05">
+  <summary>
+    <span class="when">Sat Sep 5</span>
+    <span class="what">The wedding · 4:30 PM</span>
+    <span class="note">Caloura Mar Events, Lagoa · leave hotel 3:45</span>
+  </summary>
+  <div class="body">
+    <span class="k">Ceremony</span>
+    <p><strong>Marvin and Alexandrea</strong><br>
+    4:30 PM — "half after four"<br>
+    Dinner and dancing to follow</p>
+
+    <span class="k">Venue</span>
+    <p>Caloura Mar Events, Quinta de Santo António<br>
+    Rua Quinta Altamira 51, 9560-211 Lagoa, São Miguel<br>
+    <a href="tel:+351919746578">+351 919 746 578</a></p>
+
+    <span class="k">Getting there</span>
+    <p>Caloura is on the south coast, about 20 km / <strong>25–30 minutes</strong> from the Grand Hotel. The final approach is a narrow descent toward the sea. <strong>Leave by 3:45 PM</strong>, arrive by 4:00.</p>
+
+    <div class="callout warn"><strong>Arrange the return ride in advance.</strong> Late night, unlit rural roads, and Portugal's blood-alcohol limit is 0.05 — lower than California's. Ride-hail coverage on São Miguel thins out late. Ask the couple whether they've arranged a guest shuttle before booking anything.</div>
+
+    <span class="k">Ask Alexandrea</span>
+    <p>RSVP sent? Dress code? Any role either of you has in the ceremony?</p>
+  </div>
+</details>
+
+<!-- ===== SEP 6 ===== -->
+<details class="day" data-start="2026-09-06" data-end="2026-09-06">
+  <summary>
+    <span class="when">Sun Sep 6</span>
+    <span class="what">São Miguel — open day</span>
+    <span class="note">Your only unscheduled day of the trip</span>
+  </summary>
+  <div class="body">
+    <p>Nothing booked. The usual three are <strong>Sete Cidades</strong> (the twin crater lakes), <strong>Furnas</strong> (hot springs and the volcanic-cooked stew), and <strong>whale watching</strong> out of Ponta Delgada harbour.</p>
+    <p>Without a car, taxi drivers run fixed-price island tours — commonly quoted around €30 per area. <strong>Agree the price before setting off</strong>, and book the night before.</p>
+    <p><a href="tel:+351962959255">Taxis Ponta Delgada &amp; Ribeira Grande · +351 962 959 255</a></p>
+    <p>Whale watching should be booked ahead in September; it's still high season.</p>
+  </div>
+</details>
+
+<!-- ===== SEP 7 ===== -->
+<details class="day" data-start="2026-09-07" data-end="2026-09-07">
+  <summary>
+    <span class="when">Mon Sep 7</span>
+    <span class="what">Ponta Delgada → Boston</span>
+    <span class="note">S4 281, 18:05–19:50 · Hyatt Regency Boston Harbor</span>
+  </summary>
+  <div class="body">
+    <span class="k">Azores Airlines S4 281 · PDL → BOS</span>
+    <p>Depart <strong>18:05</strong> · Arrive Boston Logan <strong>19:50</strong>, Terminal E · 5h 45m</p>
+
+    <div class="callout warn"><strong>Last check-in is 17:05 — a hard cutoff.</strong> Be at PDL by 15:30. Book the taxi the night before, not the morning of.</div>
+
+    <p>Baggage 2 pieces each, up to 32 kg (fee applies 23–32 kg) · carry-on 1 piece, 8 kg, 55×40×20 cm<br>
+    Comfort LIGHT fare (LIT) — changes and refunds permitted with a penalty<br>
+    Booking ref <span class="ref">XTZVFI</span> · ticket <span class="ref">331 2406424031</span></p>
+
+    <span class="k">Hyatt Regency Boston Harbor</span>
+    <p>101 Harborside Drive, Boston, MA 02128<br>
+    <a href="tel:+16175681234">+1 617 568 1234</a><br>
+    Confirmation <span class="ref">40023B23723449</span><br>
+    Check-in from 4:00 PM Mon · check-out by 12:00 PM Tue</p>
+    <p>The hotel is <strong>on Logan airport grounds</strong> with a <strong>free 24-hour shuttle</strong>. Clear customs and collect bags at Terminal E, then catch the shuttle from the courtesy-shuttle pickup outside baggage claim. Call the hotel if it doesn't appear — the 24-hr line is on demand.</p>
+
+    <div class="callout"><strong>You must collect and re-check your bags.</strong> Arriving international, bags come to you at Terminal E; in the morning you re-check them at JetBlue in Terminal C. They will not flow through.</div>
+
+    <span class="k">If something goes wrong</span>
+    <p><a href="tel:+18007629995">Azores Airlines US · +1 800 762 9995</a><br>
+    <a href="tel:+351296209720">Azores Airlines Portugal · +351 296 209 720</a></p>
+  </div>
+</details>
+
+<!-- ===== SEP 8 ===== -->
+<details class="day" data-start="2026-09-08" data-end="2026-09-08">
+  <summary>
+    <span class="when">Tue Sep 8</span>
+    <span class="what">Boston → LAX · home</span>
+    <span class="note">B6 1487, 11:00–14:10</span>
+  </summary>
+  <div class="body">
+    <span class="k">JetBlue B6 1487 · BOS → LAX</span>
+    <p>Depart <strong>11:00</strong> from Terminal C · Arrive LAX <strong>14:10</strong>, Terminal 1 · 6h 10m<br>
+    Baggage 2 pieces · carry-on 2 pieces free (up to 45 linear inches, 22×14×9)<br>
+    Ticketed on the Azores Airlines document, ref <span class="ref">XTZVFI</span></p>
+
+    <div class="callout"><strong>Hotel shuttle by 8:15–8:30 AM.</strong> Terminal C, bags to re-check, and Logan security on a Tuesday morning.</div>
+
+    <span class="k">Check-in</span>
+    <p>JetBlue app opens 24 hrs out. Because this sits on an Azores Airlines ticket, if the app can't find you, search by ticket number <span class="ref">331 2406424031</span> or use the airport counter.</p>
+
+    <span class="k">If something goes wrong</span>
+    <p><a href="tel:+18005382583">JetBlue · +1 800 538 2583</a>, or Azores Airlines, who issued the ticket.</p>
+  </div>
+</details>
+
+<h2 id="transport">Getting around · no rental car</h2>
+<p class="hint">Every leg has a public-transport or taxi answer. Two habits make it work: book São Miguel taxis the night before, and carry cash in the Azores.</p>
+
+<details class="day">
+  <summary><span class="what">The whole ground plan, leg by leg</span><span class="note">Tap to open</span></summary>
+  <div class="body">
+    <span class="k">Sat Aug 29 · Lisbon airport → hotel</span>
+    <p>Metro red line to Alameda, change to green, off at Restauradores. ~30 min. Or Uber/Bolt €15–20.</p>
+    <span class="k">Sun Aug 30 · Lisbon → Lagos</span>
+    <p>CP train via Tunes, or Rede Expressos coach direct from Sete Rios. ~4 hrs. <strong>Book now.</strong></p>
+    <span class="k">Aug 30 – Sep 3 · around Lagos</span>
+    <p>Cascade is ~5 min from town. Uber and Bolt work in Lagos but thin out early morning and late night — local taxi firms are more reliable at odd hours.</p>
+    <span class="k">Thu Sep 3 · Lagos → Faro airport</span>
+    <p>Pre-booked transfer €90–130, or train + taxi €25–30. ~1 hr by road.</p>
+    <span class="k">Thu Sep 3 · PDL airport → hotel</span>
+    <p>Taxi ~10 min, €10–15. Cash.</p>
+    <span class="k">Sat Sep 5 · hotel → wedding</span>
+    <p>25–30 min each way. Book the return pickup in advance.</p>
+    <span class="k">Sun Sep 6 · around São Miguel</span>
+    <p>Fixed-price taxi tours. Agree the price before setting off.</p>
+    <span class="k">Mon Sep 7 · hotel → PDL airport</span>
+    <p>Taxi ~10 min. Book the night before for a mid-afternoon pickup; you need to be there by 15:30.</p>
+    <span class="k">Mon Sep 7 / Tue Sep 8 · Logan ↔ Hyatt</span>
+    <p>Free 24-hour hotel shuttle, courtesy-shuttle pickup outside Terminal E baggage claim. Leave 8:15–8:30 Tuesday morning.</p>
+  </div>
+</details>
+
+<h2 id="contacts">Numbers · tap to call</h2>
+
+<div class="sos">
+<a class="call" href="tel:112"><span class="who">Emergency in Portugal<small>Police · fire · ambulance</small></span><span class="num">112</span></a>
+</div>
+
+<a class="call" href="tel:+351919746578"><span class="who">Caloura Mar Events<small>Wedding venue</small></span><span class="num">+351 919 746 578</span></a>
+<a class="call" href="tel:+18004337300"><span class="who">American Airlines<small>LAX–PHL–LIS</small></span><span class="num">+1 800 433 7300</span></a>
+<a class="call" href="tel:+18007629995"><span class="who">Azores Airlines (US)<small>Ref XTZVFI</small></span><span class="num">+1 800 762 9995</span></a>
+<a class="call" href="tel:+351296209720"><span class="who">Azores Airlines (Portugal)</span><span class="num">+351 296 209 720</span></a>
+<a class="call" href="tel:+18005382583"><span class="who">JetBlue<small>BOS–LAX</small></span><span class="num">+1 800 538 2583</span></a>
+<a class="call" href="tel:+351210412300"><span class="who">The One Palácio da Anunciada<small>Lisbon</small></span><span class="num">+351 210 412 300</span></a>
+<a class="call" href="tel:+18882734683"><span class="who">Hotelsone<small>Booking agent · itin 9101606043910</small></span><span class="num">+1 888 273 4683</span></a>
+<a class="call" href="tel:+351282771500"><span class="who">Cascade Wellness Resort<small>Lagos</small></span><span class="num">+351 282 771 500</span></a>
+<a class="call" href="tel:+351296302200"><span class="who">Grand Hotel Açores Atlântico<small>Ponta Delgada</small></span><span class="num">+351 296 302 200</span></a>
+<a class="call" href="tel:+16175681234"><span class="who">Hyatt Regency Boston Harbor<small>Shuttle &amp; front desk</small></span><span class="num">+1 617 568 1234</span></a>
+
+<h2>Taxis &amp; transfers</h2>
+
+<a class="call" href="tel:+351920137793"><span class="who">Lagos Transfers &amp; Tours<small>24 hrs · vans · airport runs</small></span><span class="num">+351 920 137 793</span></a>
+<a class="call" href="tel:+351925841130"><span class="who">Black &amp; Green Taxi, Lagos<small>24 hrs · replies on WhatsApp</small></span><span class="num">+351 925 841 130</span></a>
+<a class="call" href="tel:+351928488984"><span class="who">Black Taxi, Lagos<small>Early mornings</small></span><span class="num">+351 928 488 984</span></a>
+<a class="call" href="tel:+351969124177"><span class="who">Faro Airport Transfers<small>Pre-book door to door</small></span><span class="num">+351 969 124 177</span></a>
+<a class="call" href="tel:+351914757222"><span class="who">TAXI FARO &amp; Airport Transfers<small>Backup</small></span><span class="num">+351 914 757 222</span></a>
+<a class="call" href="tel:+351296382000"><span class="who">Taxis Ponta Delgada – Airport<small>24 hrs · cash · book the night before</small></span><span class="num">+351 296 382 000</span></a>
+<a class="call" href="tel:+351962959255"><span class="who">Taxis Ponta Delgada &amp; Ribeira Grande<small>Ask for a quote when booking</small></span><span class="num">+351 962 959 255</span></a>
+
+<h2>If things go wrong</h2>
+
+<a class="call" href="tel:+351217273300"><span class="who">U.S. Embassy, Lisbon<small>Press 0 after hours</small></span><span class="num">+351 21 727 3300</span></a>
+<a class="call" href="tel:+351296308330"><span class="who">U.S. Consulate, Ponta Delgada<small>After hours +351 296 282 216</small></span><span class="num">+351 296 308 330</span></a>
+<a class="call" href="tel:+12025014444"><span class="who">U.S. State Dept from abroad<small>24/7</small></span><span class="num">+1 202 501 4444</span></a>
+
+<h2 id="open">Still to do</h2>
+
+<div class="callout warn"><strong>Before Aug 25</strong> — Cascade's free-cancellation deadline. After that the full €1,637.30 is owed no matter what happens.</div>
+
+<ol class="todo">
+  <li><strong>Book Lisbon → Lagos this week.</strong> Cheap seats are limited and the fare climbs as they sell.</li>
+  <li><strong>Trip insurance.</strong> The Lisbon room and the Azores flight are already non-refundable.</li>
+  <li><strong>Welcome drinks</strong> — time and venue from the wedding website.</li>
+  <li><strong>RSVP</strong>, if the response card hasn't gone back.</li>
+  <li><strong>Wedding-night ride home.</strong> Ask Alexandrea about a guest shuttle first.</li>
+  <li><strong>Lagos → Faro transfer</strong> for Sep 3.</li>
+  <li><strong>PDL taxis</strong> for the Sep 3 arrival and the Sep 7 airport run.</li>
+  <li><strong>AA record locator</strong>, and confirm both names and seats on the outbound.</li>
+  <li><strong>Brian's ticket number</strong> for PDL→BOS→LAX — check-in will want it.</li>
+  <li><strong>Operating airline and flight number</strong> for Faro → Ponta Delgada.</li>
+  <li><strong>Grand Hotel FLEX cancellation deadline</strong>, and whether breakfast is included.</li>
+  <li><strong>Passports</strong> valid at least 3 months past Sep 8, 2026.</li>
+  <li><strong>Name match</strong> — Shalene's ticket reads "Lindsey Shalene Mrs". Confirm against her passport.</li>
+  <li><strong>Watch both inboxes</strong> — b.linzee@gmail.com and brian@procam-preshapes.com.</li>
+  <li><strong>The 56-minute PHL connection.</strong> Still the biggest single risk in the trip.</li>
+</ol>
+
+<footer>
+  <button id="refresh" style="font-family:var(--data);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;background:#fff;color:var(--azulejo);border:1px solid var(--rule);border-radius:999px;padding:.5rem 1.1rem;margin-bottom:1rem">Check for updates</button><br>
+  Version 3 · Aug 2, 2026<br>
+  Private page — don't share the address publicly.
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var t = new Date();
+  var key = t.getFullYear() + "-" + String(t.getMonth()+1).padStart(2,"0") + "-" + String(t.getDate()).padStart(2,"0");
+  var cards = document.querySelectorAll("details.day[data-start]");
+  var first = null;
+  cards.forEach(function(c){
+    if(key >= c.dataset.start && key <= c.dataset.end){
+      c.classList.add("today");
+      c.open = true;
+      if(!first) first = c;
+    }
+  });
+  if(first){ setTimeout(function(){ first.scrollIntoView({block:"start"}); }, 80); }
+
+  document.getElementById("openAll").addEventListener("click", function(){
+    document.querySelectorAll("details.day").forEach(function(d){ d.open = true; });
+  });
+  document.getElementById("closeAll").addEventListener("click", function(){
+    document.querySelectorAll("details.day").forEach(function(d){ d.open = false; });
+  });
+  document.getElementById("refresh").addEventListener("click", function(){ location.reload(true); });
+})();
+</script>
+
+</body>
+</html>
